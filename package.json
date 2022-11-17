@@ -1,0 +1,35 @@
+{
+    "name": "nodeapiwithtypescript",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node dist/app.js",
+        "dev": "nodemon src/app.ts",
+        "build": "tsc -p ."
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.20.1",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.1.0",
+        "rxjs": "^6.6.2",
+        "socket.io": "^4.5.3",
+        "sqlite3": "^5.1.2"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.7",
+        "@types/jsonwebtoken": "^8.5.9",
+        "@types/mysql": "^2.15.15",
+        "@types/mysql2": "github:types/mysql2",
+        "@types/node": "^14.0.26",
+        "nodemon": "^2.0.4",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.7"
+    }
+}
