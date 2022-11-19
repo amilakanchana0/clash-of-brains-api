@@ -5,6 +5,7 @@ export class Game {
     NoOfQuestions: number;
     Status: GameStatus;
     WinerId?: number;
+    IsBothPlayersJoined: boolean;
 
     constructor ( noOfQuestions: number, status: number ) {
         this.NoOfQuestions = noOfQuestions;

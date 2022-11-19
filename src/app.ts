@@ -40,12 +40,23 @@ app.post( '/createGame', authenticate, async ( req: Request, res: Response, next
 
 } );
 
-app.post( '/startGame', authenticate, async ( req: Request, res: Response, next: NextFunction ) => {
+app.get( '/joinGame', authenticate, async ( req: Request, res: Response, next: NextFunction ) => {
     let gameRouter: GameRouter = new GameRouter( req, res )
-    gameRouter.startGame();
+    gameRouter.joinGame();
 
 } );
 
+app.get( '/getGameById', authenticate, async ( req: Request, res: Response, next: NextFunction ) => {
+    let gameRouter: GameRouter = new GameRouter( req, res )
+    gameRouter.getGameById();
+
+} );
+
+app.post( '/onAnswerSubmit', authenticate, async ( req: Request, res: Response, next: NextFunction ) => {
+    let gameRouter: GameRouter = new GameRouter( req, res )
+    gameRouter.onAnswerSubmit();
+
+} );
 
 httpServer.listen( 5000, () => console.log( `listening on port ${ 5000 }` ) );
 

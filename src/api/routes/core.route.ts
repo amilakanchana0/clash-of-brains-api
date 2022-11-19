@@ -9,14 +9,13 @@ export class CoreRoute {
     res: Response;
     socket: socket.Server;
     constructor ( req: Request, res: Response ) {
-        this.db = new DB();
+        // this.db = new DB(); // TODO
         this.req = req;
         this.res = res;
         this.socket = Websocket.getInstance();
     }
 
     mapRequest<T> (): T {
-
         let keys: string[] = Object.keys( this.req.body );
         let entity: any = {};
         keys.forEach( ( key: string ) => {
@@ -25,6 +24,14 @@ export class CoreRoute {
         return entity as T;
     }
 
+    getParameter ( key: string ): any {
+
+        return this.req.query[ key ];
+    }
+
+    get playerId (): any {
+        return ( this.req as any ).PlayerId;
+    }
 
     handleError ( returnValue: ResponseMessage, err: unknown ): void {
         returnValue.Message = err as any;

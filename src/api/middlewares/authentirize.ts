@@ -15,8 +15,7 @@ export const authenticate = ( req: any, res: Response, next: NextFunction ) => {
             if ( err ) {
                 return res.sendStatus( 403 );
             }
-
-            req.Player = user;
+            req.PlayerId = user.PlayerId;
             next();
         } );
     } else {

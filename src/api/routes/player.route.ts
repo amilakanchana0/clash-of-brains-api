@@ -5,18 +5,19 @@ import { CoreRoute } from './core.route';
 import { Request, Response } from 'express';
 import { createToken } from '../../core/auth/authenticator';
 import { ResponseMessage } from '../response/response-message';
+import { DB } from '../../core/db/db-connection';
 export class PlayerRouter extends CoreRoute {
     constructor ( req: Request, res: Response ) {
         super( req, res );
     }
     async add (): Promise<void> {
-
+        this.db = new DB();
         let returnValue: ResponseMessage = new ResponseMessage();
         try {
             await this.db.connect();
             await this.db.beginTransaction();
 
-            let playerRepository: PlayerRepository = this.db.getRepository( PlayerRepository );
+            let playerRepository: PlayerRepository = new PlayerRepository( this.db );
             const player: Player = this.mapRequest<Player>();
 
             const newPlayer: Player = new Player( player.PlayerName, player.Password );
@@ -56,13 +57,13 @@ export class PlayerRouter extends CoreRoute {
     }
 
     async signIn (): Promise<void> {
-
+        this.db = new DB();
         let returnValue: ResponseMessage = new ResponseMessage();
         try {
             await this.db.connect();
             await this.db.beginTransaction();
 
-            let playerRepository: PlayerRepository = this.db.getRepository( PlayerRepository );
+            let playerRepository: PlayerRepository = new PlayerRepository( this.db );
             const player: Player = this.mapRequest<Player>();
 
             const newPlayer: Player = new Player( player.PlayerName, player.Password );
@@ -99,12 +100,12 @@ export class PlayerRouter extends CoreRoute {
 
 
     async getTop5Players (): Promise<void> {
-
+        this.db = new DB();
         let returnValue: ResponseMessage = new ResponseMessage();
         try {
             await this.db.connect();
 
-            let playerRepository: PlayerRepository = this.db.getRepository( PlayerRepository );
+            let playerRepository: PlayerRepository = new PlayerRepository( this.db );
             const palyers: Player[] = await playerRepository.getTop5Players();
 
             returnValue.Content = palyers;

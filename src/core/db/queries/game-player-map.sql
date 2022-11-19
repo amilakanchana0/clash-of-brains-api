@@ -1,0 +1,1 @@
+CREATE TABLE `sql12561279`.`GamePlayerMap` ( `GameId` INT NOT NULL , `PlayerId` INT NOT NULL ) ENGINE = InnoDB;

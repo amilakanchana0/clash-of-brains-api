@@ -1,1 +1,2 @@
-CREATE TABLE Game ( `GameId` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `NoOfQuestions` INT NOT NULL, `Status` INT NOT NULL, `WinerId` INT NULL ) ENGINE = INNODB
+CREATE TABLE Game ( `GameId` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `NoOfQuestions` INT NOT NULL, `Status` INT NOT NULL, `WinerId` INT NULL, 'IsBothPlayersJoined' bit not null default 0
+ ) ENGINE = INNODB

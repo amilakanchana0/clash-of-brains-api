@@ -11,7 +11,7 @@ const pool = mysql.createPool( {
     password: 'nxykHX6BCN',
     database: 'sql12561279',
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 1000,
     queueLimit: 0,
     port: 3306,
     connectTimeout: 20000
@@ -21,7 +21,6 @@ const pool = mysql.createPool( {
 
 let connection: PoolConnection;
 export class DB {
-
     async connect (): Promise<void> {
         try {
             connection = await pool.getConnection();
@@ -29,7 +28,6 @@ export class DB {
         catch ( err ) {
             console.log( err )
             throw new Error();
-
         }
     }
 
