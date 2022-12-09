@@ -9,7 +9,7 @@ export class CoreRoute {
     res: Response;
     socket: socket.Server;
     constructor ( req: Request, res: Response ) {
-        // this.db = new DB(); // TODO
+        this.db = new DB();
         this.req = req;
         this.res = res;
         this.socket = Websocket.getInstance();

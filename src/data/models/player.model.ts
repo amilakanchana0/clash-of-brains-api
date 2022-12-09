@@ -3,7 +3,7 @@ export class Player {
     PlayerName: string;
     Password: string;
     JoinedOn: Date;
-    MatchesWon: number;
+    GamesWon: number;
     AccessToken: string;
     RefreshToken: string;
 

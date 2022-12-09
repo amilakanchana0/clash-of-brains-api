@@ -18,12 +18,11 @@ const pool = mysql.createPool( {
 } );
 
 
-
-let connection: PoolConnection;
 export class DB {
+    connection: PoolConnection;
     async connect (): Promise<void> {
         try {
-            connection = await pool.getConnection();
+            this.connection = await pool.getConnection();
         }
         catch ( err ) {
             console.log( err )
@@ -32,11 +31,11 @@ export class DB {
     }
 
     async beginTransaction (): Promise<void> {
-        await connection.beginTransaction();
+        await this.connection.beginTransaction();
     }
 
     private async query ( quaryText: string, values?: any[] ): Promise<any> {
-        const result: any[] = await connection.query( quaryText, values );
+        const result: any[] = await this.connection.query( quaryText, values );
         return result[ 0 ];
     }
 
@@ -47,15 +46,15 @@ export class DB {
     }
 
     async rollback (): Promise<void> {
-        await connection?.rollback();
+        await this.connection?.rollback();
     }
 
     async commit (): Promise<void> {
-        await connection.commit();
+        await this.connection.commit();
     }
 
     release (): void {
-        connection?.release();
+        this.connection?.release();
     }
 
     getRepository<T> ( type: ( new ( connection: DB ) => T ) ): T {

@@ -61,4 +61,26 @@ export class PlayerRepository extends GenricRepository<Player>{
         return this.map( result );
     }
 
+    async findById ( playerId: number ): Promise<Player[]> {
+        const queryText: string = 'SELECT PlayerId, PlayerName, GamesWon FROM Players WHERE PlayerId = @PlayerId';
+
+        const dbCommand: DBCommand = new DBCommand();
+        dbCommand.query = queryText;
+        dbCommand.addDbParameter( '@PlayerId', playerId );
+
+        const result = await this.db.execute( dbCommand );
+        return this.map( result );
+    }
+
+    async updateGamesWon ( player: Player ): Promise<void> {
+        const queryText: string = 'UPDATE Players SET GamesWon = @GamesWon WHERE PlayerId = @PlayerId';
+
+        const dbCommand: DBCommand = new DBCommand();
+        dbCommand.query = queryText;
+        dbCommand.addDbParameter( '@GamesWon', player.GamesWon );
+        dbCommand.addDbParameter( '@PlayerId', player.PlayerId );
+
+        await this.db.execute( dbCommand );
+    }
+
 }

@@ -45,7 +45,7 @@ export class GameRepository extends GenricRepository<Game>{
         return result.insertId;
     }
 
-    async update ( game: Game ): Promise<number> {
+    async update ( game: Game ): Promise<void> {
         const queryText: string = `
             UPDATE Game SET            
                   Status = @Status, WinerId = @WinerId
@@ -53,13 +53,11 @@ export class GameRepository extends GenricRepository<Game>{
         `;
         const dbCommand: DBCommand = new DBCommand();
         dbCommand.query = queryText;
-
-        dbCommand.addDbParameter( '@WinerId', game.WinerId );
         dbCommand.addDbParameter( '@Status', game.Status );
+        dbCommand.addDbParameter( '@WinerId', game.WinerId );
         dbCommand.addDbParameter( '@GameId', game.GameId );
 
-        let result: ResultSetHeader = await this.db.execute( dbCommand );
-        return result.insertId;
+        await this.db.execute( dbCommand );
     }
 
 }

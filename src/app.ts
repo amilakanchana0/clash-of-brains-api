@@ -58,5 +58,11 @@ app.post( '/onAnswerSubmit', authenticate, async ( req: Request, res: Response, 
 
 } );
 
+app.get( '/updateWinner', authenticate, async ( req: Request, res: Response, next: NextFunction ) => {
+    let gameRouter: GameRouter = new GameRouter( req, res )
+    gameRouter.updateWinner();
+
+} );
+
 httpServer.listen( 5000, () => console.log( `listening on port ${ 5000 }` ) );
 
